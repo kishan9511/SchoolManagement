@@ -1,0 +1,76 @@
+﻿@page
+@model SchoolManagement.Pages.Student.resultModel
+@{
+}
+
+
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <!-- 1st container fluid start-->
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>All Student Result</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-page="AttendenceList">Home</a></li>
+                        <li class="breadcrumb-item active">Result Tables</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card-body card card-outline card-success pl-1">
+                        
+                        <table id="example1" class="table table-bordered table-striped">
+                            <!--For drop menu-->
+                            <thead>
+                                <tr>
+                                    <th scope="col">USN</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Subject</th>
+                                    <th scope="col">Max Marks</th>
+                                    <th scope="col">Passing Marks</th>
+                                    <th scope="col"> Marks</th>
+                                    <th scope="col"> Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.ResultDatalist.Count() > 0)
+                                {
+                                    foreach (var item in Model.ResultDatalist)
+                                    {
+                                        <tr>
+                                            <td>@item.USNDropdown</td>
+                                            <td>@item.NameDropdown</td>
+                                            <td>@item.SubjectNameDropdown</td>
+                                            <td>@item.TotalMarks</td>
+                                            <td>@item.PassingMarks</td>
+                                            <td>@item.MarksDropdown</td>
+                                            <td>@item.Result</td>
+                                            
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+
+                                    <tr>No data found</tr>
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

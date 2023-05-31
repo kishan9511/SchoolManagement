@@ -1,0 +1,31 @@
+﻿@{
+    var path = $"{Context.Request.Path}/";
+    var isAdmin = path.Contains("/Admin");
+    var isTeacher = path.Contains("/Teacher");
+    var isStudent = path.Contains("/Student");
+
+    if (isAdmin)
+    {
+        Layout = "_LayoutAdmin";
+    }
+
+
+    else if (isTeacher)
+    {
+        Layout = "_LayoutTeacher";
+    }
+
+
+    else if (isStudent)
+    {
+        Layout = "_LayoutStudent";
+    }
+
+
+
+    else
+    {
+        Layout = "_Layout";
+
+    }
+}

@@ -1,0 +1,167 @@
+﻿ @page
+@model SchoolManagement.Pages.Teacher.MarksEntryModel
+@{
+}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <!-- 1st container fluid start-->
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Marks Entry</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-page="ApprovedForExamination">Home</a></li>
+                        <li class="breadcrumb-item active">DataTables</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+     
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <div class="card card-primary card-outline card-info">
+                    <h5 class="ml-3">Marks Entry</h5>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Entry.Id" />
+
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label class="ml-2"> Select Student Name </label>
+
+                                    <select id="NameDropdown" class="form-control select2" asp-items="Model.optionNameDropdown" asp-for="StudentDetailID"></select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="ml-2"> Select Subject </label>
+                                    <select id="SubjectNameDropdown" class="form-control select2" asp-items="Model.optionSubjectNameDropdown" asp-for="SubjectID"></select>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label class="ml-2"> Max Marks </label>
+                                    <input type="text" asp-for="Entry.TotalMakes" class="form-control" placeholder="Max Marks" required>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label class="ml-2"> Passin Marks </label>
+                                    <input type="text" asp-for="Entry.PassingMarks" class="form-control" placeholder="passing Marks" required>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label class="ml-2"> Marks </label>
+                                    <input type="text" asp-for="Entry.Marks" class="form-control" placeholder="Marks" required>
+                                </div>
+
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="text-center mt-3">
+                                @if (Model.Entry.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-info">UPDATE</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-info">SUBMIT</button>
+
+                                }
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <form method="post">
+                    <div class="card-body card card-outline card-success pl-1">
+                        <div class="card-header">
+
+                            <h3 class="mr-2">Datalist</h3>
+                        </div>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <!--For drop menu-->
+                            <thead>
+                                <tr>
+                                    <th scope="col">Select Student Name</th>
+                                    <th scope="col">Subject</th>
+                                    <th scope="col">Max Marks</th>
+                                    <th scope="col">Passing Marks</th>
+                                    <th scope="col"> Marks</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.marksEntryDatabase.Count() > 0)
+                                {
+                                    foreach (var item in Model.marksEntryDatabase)
+                                    {
+                                        <tr>
+                                           
+                                            <td>@item.NameDropdown</td>
+                                            <td>@item.SubjectNameDropdown</td>
+                                            <td>@item.TotalMarks</td>
+                                            <td>@item.PassingMarks</td>
+                                            <td>@item.Marks</td>
+                                            <td class="mr-5">
+                                                <a asp-page="MarksEntry" asp-route-id="@item.ID" class="btn btn-success">EDIT</a>
+
+
+                                                <button asp-page-handler="Delete" asp-route-id="@item.ID"
+                                                        onclick="return confirm('Are you sure you want to DELETE?')" class="btn btn-danger">
+                                                    DELETE
+                                                </button>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+
+                                    <tr>No data found</tr>
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @{
+        if (TempData["success"] != null)
+        {
+            <script type="text/javascript">
+                toastr.success('@TempData["success"]');
+            </script>
+        }
+
+        if (TempData["error"] != null)
+        {
+            <script type="text/javascript">
+                toastr.error('@TempData["error"]');
+            </script>
+        }
+        if (TempData["info"] != null)
+        {
+            <script type="text/javascript">
+                toastr.info('@TempData["info"]');
+            </script>
+        }
+    }
+
+    }

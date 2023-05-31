@@ -1,0 +1,68 @@
+﻿@page
+@model SchoolManagement.Pages.Student.AttendenceListModel
+@{
+}
+
+
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <!-- 1st container fluid start--> 
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Class Attendance List</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-page="AttendenceList">Home</a></li>
+                        <li class="breadcrumb-item active">List</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card-body card card-outline card-success pl-1">
+                        
+                        <table id="example1" class="table table-bordered table-striped">
+                            <!--For drop menu-->
+                            <thead>
+                                <tr>
+                                    <th scope="col">USN</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Attendance</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.studentAttendancesDatalist.Count() > 0)
+                                {
+                                    foreach (var item in Model.studentAttendancesDatalist)
+                                    {
+                                        <tr>
+                                            <td>@item.USNDropdown</td>
+                                            <td>@item.NameDropdown</td>
+                                            <td>@item.Attendance</td>
+                                            <td>@item.Date</td>
+                                           
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>No data found</tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
